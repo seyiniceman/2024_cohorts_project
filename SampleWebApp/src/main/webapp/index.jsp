@@ -51,7 +51,8 @@
 <body>
 
     <h1>Welcome to Seyi's Music Lifestyle Form</h1>
-    <p>Seyi is a 40-year-old African man with a great sense of humor. He traveled to Europe to claim asylum, work hard, and create a better life for himself. Help us learn more about your music preferences.</p>
+    <p>Seyifunmi is a Nigerian with a passion for exploring new horizons. He loves to travel, meet new people, and constantly improve himself in every way possible. Seyi has a deep curiosity for life and technology, spending hours working on his computer and learning new skills that help him become a better version of himself every day. He's not just focused on work; Seyi is also a huge fan of music. Whether it’s playing an instrument or listening to his favorite genres, music brings balance and creativity into his life.</p>
+    <p>Seyi enjoys discovering new music and staying up-to-date with the latest trends in the music world. Through this form, we want to learn more about your music preferences and how music fits into your own lifestyle. Let’s dive in and explore the world of music together!</p>
 
     <form action="submitForm.jsp" method="post" enctype="multipart/form-data">
         <!-- Music Genre Selection -->
@@ -117,38 +118,4 @@
         <input type="text" id="lastName" name="lastName" required>
 
         <label for="dob">Date of Birth:</label>
-        <input type="date" id="dob" name="dob" required>
-
-        <!-- Contact Information -->
-        <h2>Contact Info</h2>
-        <label for="mobile">Mobile No:</label>
-        <input type="tel" id="mobile" name="mobile" required>
-
-        <label for="contactEmail">Email:</label>
-        <input type="email" id="contactEmail" name="contactEmail" required>
-
-        <label for="address">Address:</label>
-        <textarea id="address" name="address" rows="3"></textarea>
-
-        <label for="city">City:</label>
-        <input type="text" id="city" name="city">
-
-        <label for="state">State:</label>
-        <select id="state" name="state">
-            <option value="al">Alabama AL</option>
-            <!-- Add other states as needed -->
-        </select>
-
-        <label for="zip">Zip Code:</label>
-        <input type="text" id="zip" name="zip">
-
-        <!-- Search Box -->
-        <label for="search">Search Here:</label>
-        <input type="text" id="search" name="search" placeholder="Enter search keyword">
-
-        <!-- Submit Button -->
-        <input type="submit" value="Submit">
-    </form>
-
-</body>
-</html>
+        <input type="
