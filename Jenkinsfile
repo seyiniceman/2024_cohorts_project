@@ -1,23 +1,19 @@
 pipeline {
     agent any
     
-    tools {
-        maven 'Maven'   // Define Maven tool in Jenkins (or Gradle if needed)
-    }
-
     stages {
 
         // Stage 1: Testing Stage
         stage('Testing') {
             steps {
-                sh 'cd SampleWebApp && mvn test'  // Ensure commands are properly chained with &&
+                sh 'cd SampleWebApp && mvn test'  // Fixed command chaining
             }
         }
 
         // Stage 2: Build and Compile
         stage('Build & Compile') {
             steps {
-                sh 'cd SampleWebApp && mvn clean install'  // Consistent use of && for chaining
+                sh 'cd SampleWebApp && mvn clean install'
             }
         }
 
@@ -25,7 +21,7 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 echo 'Performing SonarQube code analysis...'
-                withSonarQubeEnv('sonar_server') {  // Ensure 'sonar_server' matches the SonarQube configuration in Jenkins
+                withSonarQubeEnv('sonar_server') {  // This is the name of your SonarQube server in Jenkins
                     sh 'mvn -f SampleWebApp/pom.xml sonar:sonar'
                 }
             }
@@ -49,3 +45,28 @@ pipeline {
                     protocol: 'http', 
                     repository: 'maven-snapshots', 
                     version: '1.0-SNAPSHOT'
+                }
+            }
+        }
+
+        // Stage 5: Deploy to Tomcat Webserver
+        stage('Deploy to Tomcat') {
+            steps {
+                deploy adapters: [tomcat9(
+                    credentialsId: 'Tomcat_ID', 
+                    path: '', 
+                    url: 'http://3.248.193.120:8080'
+                )], 
+                contextPath: 'webapp', 
+                war: '**/*.war'
+            }
+        }
+    }
+
+    post {
+        always {
+            echo 'Cleaning up workspace...'
+            cleanWs()  // Clean up workspace after the pipeline is complete
+        }
+    }
+}
