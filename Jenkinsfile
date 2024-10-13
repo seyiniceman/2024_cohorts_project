@@ -21,13 +21,13 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 echo 'Performing SonarQube code analysis...'
-                withSonarQubeEnv('sonar_server') {  // This is the name of your SonarQube server in Jenkins
+                withSonarQubeEnv('sonar-server') {  // This is the name of your SonarQube server in Jenkins
                     sh 'mvn -f SampleWebApp/pom.xml sonar:sonar'
                 }
             }
         }
 
-        // Stage 4: Push to Nexus Artifactory
+        // Stage 4: Push to Nexus Artifactory (Updated)
         stage('Upload to Nexus') {
             steps {
                 echo 'Uploading build artifacts to Nexus...'
@@ -40,8 +40,8 @@ pipeline {
                     ]], 
                     credentialsId: 'Nexus_ID', 
                     groupId: 'SampleWebApp', 
-                    nexusUrl: '34.247.191.254:8081', 
-                    nexusVersion: 'nexus2', 
+                    nexusUrl: '54.229.101.96:8081',  // Updated Nexus URL
+                    nexusVersion: 'nexus3',           // Updated Nexus version
                     protocol: 'http', 
                     repository: 'maven-snapshots', 
                     version: '1.0-SNAPSHOT'
@@ -49,13 +49,13 @@ pipeline {
             }
         }
 
-        // Stage 5: Deploy to Tomcat Webserver
+        // Stage 5: Deploy to Tomcat Webserver (Updated)
         stage('Deploy to Tomcat') {
             steps {
                 deploy adapters: [tomcat9(
                     credentialsId: 'Tomcat_ID', 
                     path: '', 
-                    url: 'http://3.248.193.120:8080'
+                    url: 'http://3.251.79.244:8080'  // Updated Tomcat URL
                 )], 
                 contextPath: 'webapp', 
                 war: '**/*.war'
